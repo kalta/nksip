@@ -42,7 +42,7 @@
 %% ===================================================================
 
 srv_init(#{id:=SrvId}=Service, State) ->
-    Time = nkserver:get_plugin_config(SrvId, nksip_uac_auto_register, register_time),
+    Time = nkserver:get_cached_config(SrvId, nksip_uac_auto_register, register_time),
     erlang:start_timer(1000*Time, self(), nksip_uac_auto_register),
     State2 = State#{nksip_uac_auto_register=>#state{pings=[], regs=[], pids=[]}},
     {continue, [Service, State2]}.
@@ -235,7 +235,7 @@ srv_handle_cast(_Msg, _Service, _State) ->
 
 %% @private
 srv_handle_info({timeout, _, nksip_uac_auto_register}, #{id:=SrvId}, State) ->
-    Time = nkserver:get_plugin_config(SrvId, nksip_uac_auto_register, register_time),
+    Time = nkserver:get_cached_config(SrvId, nksip_uac_auto_register, register_time),
     erlang:start_timer(1000*Time, self(), nksip_uac_auto_register),
     gen_server:cast(self(), nksip_uac_auto_register_check),
     {noreply, State};

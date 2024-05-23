@@ -82,7 +82,7 @@ stop() ->
 
 register1() ->
     #nksip_registrar_time{min=Min, max=Max, default=Def} =
-        nkserver:get_plugin_config(register_test_server1, nksip_registrar, times),
+        nkserver:get_cached_config(register_test_server1, nksip_registrar, times),
     MinB = nklib_util:to_binary(Min),
     MaxB = nklib_util:to_binary(Max),
     DefB = nklib_util:to_binary(Def),

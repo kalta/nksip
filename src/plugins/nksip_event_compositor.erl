@@ -65,7 +65,7 @@ request(#sipmsg{class={req, 'PUBLISH'}}=Req) ->
         true -> 
             Expires;
         _ -> 
-            nkserver:get_plugin_config(SrvId, nksip_event_compositor, expires)
+            nkserver:get_cached_config(SrvId, nksip_event_compositor, expires)
     end,
     AOR = {RUri#uri.scheme, RUri#uri.user, RUri#uri.domain},
     case nksip_sipmsg:header(<<"sip-if-match">>, Req) of

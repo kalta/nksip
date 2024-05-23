@@ -186,7 +186,7 @@ process(Req, Opts) ->
         true ->
             throw(unsupported_uri_scheme)
     end,
-    Times = nkserver:get_plugin_config(SrvId, nksip_registrar, times),
+    Times = nkserver:get_cached_config(SrvId, nksip_registrar, times),
     Default = case nksip_sipmsg:get_meta(expires, Req) of
         D0 when is_integer(D0), D0>=0 ->
             D0;

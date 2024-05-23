@@ -317,7 +317,7 @@ nksip_uac_auto_register_upd_reg(SrvId, Reg, Code, Meta, SrvState) ->
                 false ->
                     ok
             end,
-            Config = nkserver:get_plugin_config(SrvId, nksip_uac_auto_outbound, config),
+            Config = nkserver:get_cached_config(SrvId, nksip_uac_auto_outbound, config),
             #nksip_uac_auto_outbound{
                 max_time = MaxTime,
                 all_fail = AllFail,
@@ -362,7 +362,7 @@ start_refresh(SrvId, Meta, Transp, Pid, Reg) ->
         _ ->
             undefined
     end,
-    Config = nkserver:get_plugin_config(SrvId, nksip_uac_auto_outbound, config),
+    Config = nkserver:get_cached_config(SrvId, nksip_uac_auto_outbound, config),
     Secs = case FlowTimer of
         FT when is_integer(FT), FT > 5 ->
             FT;

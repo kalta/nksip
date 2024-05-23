@@ -124,7 +124,7 @@ print(Header, #sipmsg{}=SipMsg) ->
     ok.
 
 sipmsg(SrvId, _CallId, Header, Transport, Binary) ->
-    case nkserver:get_plugin_config(SrvId, nksip_trace, config) of
+    case nkserver:get_cached_config(SrvId, nksip_trace, config) of
         {true, File, []} ->
             Msg = print_packet(SrvId, Header, Transport, Binary),
             write(SrvId, File, Msg);

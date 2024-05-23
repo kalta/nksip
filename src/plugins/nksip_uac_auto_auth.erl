@@ -65,11 +65,11 @@ check_auth(Req, Resp, UAC, Call) ->
             #call{srv_id=SrvId, call_id=_CallId} = Call,
             Max = case nklib_util:get_value(sip_uac_auto_auth_max_tries, Opts) of
                 undefined ->
-                    nkserver:get_plugin_config(SrvId, nksip_uac_auto_auth, max_tries);
+                    nkserver:get_cached_config(SrvId, nksip_uac_auto_auth, max_tries);
                 Max0 ->
                     Max0
             end,
-            ConfigPasses = nkserver:get_plugin_config(SrvId, nksip_uac_auto_auth, passwords),
+            ConfigPasses = nkserver:get_cached_config(SrvId, nksip_uac_auto_auth, passwords),
             Passes = case nklib_util:get_value(sip_pass, Opts) of
                 undefined ->
                     ConfigPasses;

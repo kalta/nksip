@@ -66,4 +66,4 @@ do_get_config(Key) ->
 
 
 srv_config(SrvId) ->
-    nkserver:get_plugin_config(SrvId, nksip, all_config).
+    nkserver:get_cached_config(SrvId, nksip, all_config).

@@ -520,4 +520,4 @@ start_timer(Time, Tag, Id) ->
 
 
 service_timers(SrvId) ->
-    nkserver:get_plugin_config(SrvId, nksip_timers, se_minse).
+    nkserver:get_cached_config(SrvId, nksip_timers, se_minse).
